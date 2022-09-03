@@ -5,7 +5,6 @@ const loadCategories = () => {
         .then(res => res.json())
         .then(data => displayCategories(data.data))
 }
-
 const displayCategories = (categories) => {
 
     const newsCategory = (categories.news_category);
@@ -29,6 +28,7 @@ const loadNews = (id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNews(data.data))
+    toggleSpinner(true)
 }
 
 
@@ -80,6 +80,17 @@ const displayNews = (newses) => {
         modalTitle.innerText = news.title;
         modalText.innerText = news.details;
     })
+    toggleSpinner(false)
+}
+
+const toggleSpinner = isLoading => {
+    const loaderSpiner = document.getElementById("spiner");
+    if (isLoading) {
+        loaderSpiner.classList.remove("d-none");
+    }
+    else {
+        loaderSpiner.classList.add("d-none");
+    }
 }
 
 loadCategories()

@@ -10,11 +10,11 @@
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-light">
 
     <!-- navbar section  -->
     <section>
-        <nav class="navbar bg-light">
+        <nav class="navbar ">
             <div class="container-fluid">
                 <h3>End <span class="text-success">Portal</span></h3>
                 <div class="d-flex">
@@ -28,15 +28,24 @@
 
     <!-- catagories section  -->
     <section>
-        <nav class="navbar bg-light">
+        <nav class="navbar ">
             <div id="category-container" class="container justify-content-center">
 
             </div>
         </nav>
     </section>
 
-    <section class="bg-light my-4 p-2 text-center">
+
+    <section class=" bg-white p-2 text-center">
         <h3><span id="items-number"></span> items found</h3>
+    </section>
+
+    <section id="spiner">
+        <div style="height: 300px;" class="d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </section>
 
     <!-- modal section  -->
@@ -61,7 +70,7 @@
     </section>
 
     <!-- news sectioin  -->
-    <section id="news-container" class="my-5">
+    <section id="news-container" class="my-4">
 
     </section>
 
