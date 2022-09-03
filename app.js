@@ -31,15 +31,24 @@ const loadNews = (id) => {
         .then(data => displayNews(data.data))
 }
 
+
 const displayNews = (newses) => {
+
+    const newsContainer = document.getElementById("news-container");
+    newsContainer.innerHTML = ``;
+
+    const newsLength = newses.length;
+    console.log(newsLength);
+    const itemsNumber = document.getElementById("items-number");
+    itemsNumber.innerText = newsLength;
+
     newses.forEach(news => {
         console.log(news);
 
         const cutText = (news.details).slice(1, 300);
 
-        const newsContainer = document.getElementById("news-container");
 
-        const div = document.createElement("div")
+        const div = document.createElement("div");
 
         div.innerHTML = `
         <div class="card mb-3 w-75 mx-auto">
