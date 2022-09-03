@@ -18,8 +18,8 @@
             <div class="container-fluid">
                 <h3>End <span class="text-success">Portal</span></h3>
                 <div class="d-flex">
-                    <button id="news-page" class="btn btn-success mx-2">News</button>
-                    <button id="question-page" class="btn btn-success mx-2">Questions</button>
+                    <a href="index.html" class="btn btn-success mx-2">News</a>
+                    <a href="question.html" class="btn btn-success mx-2">Questions</a>
                 </div>
         </nav>
     </section>
@@ -34,9 +34,9 @@
         </nav>
     </section>
 
-
+    <!-- items found  -->
     <section class=" bg-white p-2 text-center">
-        <h3><span id="items-number"></span> items found</h3>
+        <h3><span id="items-number"></span> News Found</h3>
     </section>
 
     <!-- spiner section  -->
@@ -61,7 +61,8 @@
                     <div class="modal-body">
                         <p id="news-text"></p>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex justify-content-between">
+                        <p>Published: <span id="expire"></span></p>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>

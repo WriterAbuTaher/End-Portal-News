@@ -4,7 +4,9 @@ const loadCategories = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategories(data.data))
+        .catch(error => console.log(error))
 }
+
 const displayCategories = (categories) => {
 
     const newsCategory = (categories.news_category);
@@ -23,13 +25,16 @@ const displayCategories = (categories) => {
 }
 
 const loadNews = (id) => {
+    document.getElementById("spiner").classList.remove("d-none")
+
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
 
     fetch(url)
         .then(res => res.json())
         .then(data => displayNews(data.data))
-    document.getElementById("spiner").classList.remove("d-none")
+        .catch(error => console.log(error))
 }
+
 
 
 const displayNews = (newses) => {
@@ -37,27 +42,23 @@ const displayNews = (newses) => {
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
 
-    const newsLength = newses.length;
-    const itemsNumber = document.getElementById("items-number");
-    itemsNumber.innerText = newsLength;
+    document.getElementById("items-number").innerText = newses.length;
 
-    newses.forEach(news => {
-        console.log(news);
-
-        const cutText = (news.details).slice(1, 300);
+    newses.sort((a, b) => b.total_view - a.total_view).forEach(news => {
+        // console.log(news);
 
         const div = document.createElement("div");
 
         div.innerHTML = `
         <div class="card mb-3 w-75 mx-auto">
             <div class="row g-0">
-                <div class="col-md-4 col-lg-2">
-                    <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                <div class="col-12 border col-md-3">
+                    <img src="${news.thumbnail_url}" class="img-fluid rounded-start w-100" alt="...">
                 </div>
-                <div class="col-md-8 col-lg-10">
+                <div class="col-md-9">
                     <div class="card-body">
                         <h5 class="mt-0">${news.title}</h5>
-                        <p>${cutText}...</p>
+                        <p>${news.details.slice(1, 500)}...</p>
                     </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-between align-items-center">
@@ -74,11 +75,11 @@ const displayNews = (newses) => {
         </div>
         `
         newsContainer.appendChild(div)
-
     })
     document.getElementById("spiner").classList.add("d-none")
-
 }
+
+loadNews("02")
 
 const loadModal = (id) => {
     const url = `https://openapi.programming-hero.com/api/news/${id}`;
@@ -89,27 +90,9 @@ const loadModal = (id) => {
 }
 
 const modalDetail = (news) => {
-    const modalTitle = document.getElementById("modal-label");
-    const modalText = document.getElementById("news-text")
-    modalTitle.innerText = news[0].title;
-    modalText.innerText = news[0].details;
+    document.getElementById("modal-label").innerText = news[0].title;
+    document.getElementById("news-text").innerText = news[0].details;
+    document.getElementById("expire").innerText = news[0].author.published_date;
 }
-
-const toggleSpinner = isLoading => {
-    const loaderSpiner = document.getElementById("spiner");
-    if (isLoading) {
-        loaderSpiner.classList.remove("d-none");
-    }
-    else {
-        loaderSpiner.classList.add("d-none");
-    }
-}
-
-document.getElementById("question-page").addEventListener("click", function () {
-    window.location.href = "question.html";
-})
-document.getElementById("news-page").addEventListener("click", function () {
-    window.location.href = "index.html";
-})
 
 loadCategories()
