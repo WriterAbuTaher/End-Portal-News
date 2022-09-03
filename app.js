@@ -28,7 +28,7 @@ const loadNews = (id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNews(data.data))
-    toggleSpinner(true)
+    document.getElementById("spiner").classList.remove("d-none")
 }
 
 
@@ -66,7 +66,7 @@ const displayNews = (newses) => {
                                     <p class="fw-bold mx-2">${news.author.name === null || news.author.name === "system" ? news.author.name = "Not Found" : news.author.name}</p>
                                 </div>
                             <p>${news.total_view === null ? news.total_view = "Not Found" : news.total_view}👁‍🗨</p>
-                            <button href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal">Read details</button>
+                            <button onclick="loadModal('${news._id}')" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal">Read details</button>
                         </div>
                     </div>
                 </div>
@@ -75,12 +75,24 @@ const displayNews = (newses) => {
         `
         newsContainer.appendChild(div)
 
-        const modalTitle = document.getElementById("modal-label");
-        const modalText = document.getElementById("news-text")
-        modalTitle.innerText = news.title;
-        modalText.innerText = news.details;
     })
-    toggleSpinner(false)
+    document.getElementById("spiner").classList.add("d-none")
+
+}
+
+const loadModal = (id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => modalDetail(data.data))
+}
+
+const modalDetail = (news) => {
+    const modalTitle = document.getElementById("modal-label");
+    const modalText = document.getElementById("news-text")
+    modalTitle.innerText = news[0].title;
+    modalText.innerText = news[0].details;
 }
 
 const toggleSpinner = isLoading => {
@@ -95,6 +107,9 @@ const toggleSpinner = isLoading => {
 
 document.getElementById("question-page").addEventListener("click", function () {
     window.location.href = "question.html";
+})
+document.getElementById("news-page").addEventListener("click", function () {
+    window.location.href = "index.html";
 })
 
 loadCategories()

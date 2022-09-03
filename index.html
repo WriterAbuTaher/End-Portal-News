@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 <h3>End <span class="text-success">Portal</span></h3>
                 <div class="d-flex">
-                    <button class="btn btn-success mx-2">News</button>
+                    <button id="news-page" class="btn btn-success mx-2">News</button>
                     <button id="question-page" class="btn btn-success mx-2">Questions</button>
                 </div>
         </nav>
@@ -39,7 +39,8 @@
         <h3><span id="items-number"></span> items found</h3>
     </section>
 
-    <section id="spiner">
+    <!-- spiner section  -->
+    <section id="spiner" class="d-none">
         <div style="height: 300px;" class="d-flex justify-content-center align-items-center">
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
