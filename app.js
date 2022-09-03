@@ -14,7 +14,6 @@ const displayCategories = (categories) => {
     const categoryContainer = document.getElementById("category-container")
 
     newsCategory.forEach(category => {
-        // console.log(category);
 
         const div = document.createElement("div");
 
@@ -25,7 +24,6 @@ const displayCategories = (categories) => {
 }
 
 const loadNews = (id) => {
-    document.getElementById("spiner").classList.remove("d-none")
 
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
 
@@ -33,9 +31,11 @@ const loadNews = (id) => {
         .then(res => res.json())
         .then(data => displayNews(data.data))
         .catch(error => console.log(error))
+
+    document.getElementById("spiner").classList.remove("d-none")
 }
 
-
+loadNews("02")
 
 const displayNews = (newses) => {
 
@@ -79,14 +79,13 @@ const displayNews = (newses) => {
     document.getElementById("spiner").classList.add("d-none")
 }
 
-loadNews("02")
-
 const loadModal = (id) => {
     const url = `https://openapi.programming-hero.com/api/news/${id}`;
 
     fetch(url)
         .then(res => res.json())
         .then(data => modalDetail(data.data))
+        .catch(error => console.log(error))
 }
 
 const modalDetail = (news) => {
