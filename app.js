@@ -38,7 +38,6 @@ const displayNews = (newses) => {
     newsContainer.innerHTML = ``;
 
     const newsLength = newses.length;
-    console.log(newsLength);
     const itemsNumber = document.getElementById("items-number");
     itemsNumber.innerText = newsLength;
 
@@ -46,7 +45,6 @@ const displayNews = (newses) => {
         console.log(news);
 
         const cutText = (news.details).slice(1, 300);
-
 
         const div = document.createElement("div");
 
@@ -68,7 +66,7 @@ const displayNews = (newses) => {
                                     <p class="fw-bold mx-2">${news.author.name === null || news.author.name === "system" ? news.author.name = "Not Found" : news.author.name}</p>
                                 </div>
                             <p>${news.total_view === null ? news.total_view = "Not Found" : news.total_view}👁‍🗨</p>
-                            <button href="#" class="btn btn-success">Read details</button>
+                            <button href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal">Read details</button>
                         </div>
                     </div>
                 </div>
@@ -76,6 +74,11 @@ const displayNews = (newses) => {
         </div>
         `
         newsContainer.appendChild(div)
+
+        const modalTitle = document.getElementById("modal-label");
+        const modalText = document.getElementById("news-text")
+        modalTitle.innerText = news.title;
+        modalText.innerText = news.details;
     })
 }
 
