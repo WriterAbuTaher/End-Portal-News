@@ -93,4 +93,8 @@ const toggleSpinner = isLoading => {
     }
 }
 
+document.getElementById("question-page").addEventListener("click", function () {
+    window.location.href = "question.html";
+})
+
 loadCategories()
